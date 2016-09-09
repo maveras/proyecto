@@ -3,7 +3,16 @@ gem 'devise'
 gem 'activerecord-reset-pk-sequence'
 
 gem 'railroady'
-
+gem 'puma'
+    
+group :development do
+  gem 'capistrano', '3.6.1', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rvm', require: false
+  gem 'capistrano3-puma', require: false
+  gem 'capistrano-ssh-doctor', require: false
+end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
