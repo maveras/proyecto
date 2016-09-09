@@ -1,0 +1,13 @@
+<p>Hola <%= current_user.name %> <%= current_user.id%></p>
+
+	<% @accepted_applies.each do |accepted_apply| %>
+		<h3>Tienes una actividad por hacer junto a <%= accepted_apply.user.name %></h3>
+		<%= accepted_apply.id %>
+			<h2><strong>Titulo:</strong><%= accepted_apply.request.title %></h2>
+			<h3><strong>Descripcion:</strong><%= accepted_apply.request.description %></h2>
+			<p><strong>Dia:</strong><%= accepted_apply.request.day_time %></p>
+			<p><strong>Hora:</strong><%= accepted_apply.request.day_time.strftime("%I:%M%p") %></p>
+			<p><strong>Lugar:</strong><%= accepted_apply.request.location %></p>				
+	<%end%>
+
+

@@ -1,0 +1,28 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  interest_id: 
+  description: MyText
+  day_time: 2016-08-22 21:25:05
+  state_request: 1
+  location: 
+  date_end: 2016-08-22 21:25:05
+
+two:
+  user: one
+  interest_id: 
+  description: MyText
+  day_time: 2016-08-22 21:25:05
+  state_request: 1
+  location: 
+  date_end: 2016-08-22 21:25:05
+
+three:
+  user: two
+  interest_id: 
+  description: MyText
+  day_time: 2016-08-22 21:25:05
+  state_request: 1
+  location: 
+  date_end: 2016-08-22 21:25:05

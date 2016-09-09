@@ -1,0 +1,23 @@
+	<div id="actividad-<%= request.id%>" class="jumbotron">
+	<%= request.id %>
+		<h2><strong>Titulo:</strong><%= request.title %></h2>
+		<h3><strong>Descripcion:</strong><%= request.description %></h2>
+		<p><strong>Dia:</strong><%= request.day_time %></p>
+		<p><strong>Hora:</strong><%= request.day_time.strftime("%I:%M%p") %></p>
+		<p><strong>Lugar:</strong><%= request.location %></p>
+		
+		<% if request.request_applies.count > 0 %>
+			<h2>Hay <%= pluralize(request.request_applies.apply_active.count, 'usuario postulando', 'usuarios postulando') %> a tu actividad</h2>
+			<ul>
+				<%request.request_applies.each do |apply|  %>
+					<li><%= apply.user.name %> el id es <%= apply.id %></li>
+					<%= link_to 'Rechazar',  rechazo_path(id_request_apply: apply.id), method: :patch %>
+					<%= link_to 'Aceptar',  accept_apply_path(id_request_apply: apply.id), method: :post %>
+				<% end %>
+			</ul>	
+		<% else %>
+			<h2>No hay postulantes a tu actividad ='(</h2>
+		<% end %>
+
+	</div>
+	

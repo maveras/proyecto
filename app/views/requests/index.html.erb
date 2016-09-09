@@ -1,0 +1,58 @@
+<table>
+  <thead>
+  <tr colspan="3"> Interesting things to <strong>Do it!</strong></tr>
+  <tbody>
+    <% @interesting_user_requests.each do |request| %>
+      <tr>
+        <td><strong><%= request.user.name %></strong> want to do it something interesting 4 you</td>               
+      </tr>
+      <tr>
+        <td><strong>Description</strong></td>
+        <td>"<%= request.description %>"</td> 
+      </tr>
+      <tr>        
+        <td><strong>When</strong></td>
+        <td><%= request.day_time %></td>        
+      </tr> 
+      <tr>        
+        <td><strong>Where</strong></td>   
+        <td><%= request.location %></td>                
+      </tr>
+      <tr>
+        <td><strong>State request</strong></td>
+        <td><%= request.state_request %></td>          
+      </tr>
+      </br>
+    <% end %>
+  </tbody>
+</table>
+
+</br>
+<table>
+  <thead>
+    <tr>
+      <td colspan="3">Other user want to do it!</td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @other_requests.each do |other_request| %>
+      <tr>
+        <td><strong><%= other_request.user.name %> </strong></td>
+        <td>"<%= other_request.description %>"</td>        
+      </tr>
+      <tr>        
+        <td><strong>When</strong></td>
+        <td><%= other_request.day_time %></td>        
+      </tr> 
+      <tr>        
+        <td><strong>Where</strong></td>   
+        <td><%= other_request.location %></td>                
+      </tr>
+      <tr>
+        <td><strong>State Request</strong></td>
+        <td><%= other_request.state_request %></td>          
+      </tr>
+    <% end %>
+  </tbody>
+</table>
