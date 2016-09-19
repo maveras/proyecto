@@ -8,20 +8,28 @@ Rails.application.routes.draw do
     resources :user_interests
   end
 
-  get 'requests/index'  
-
   get 'landings/welcome'
   
   get 'request_applies/index'
 
-  get 'request_applies/accepted_applies'
+  get  'requests/index'  
+  get  'requests/new'
+  post 'requests/create'
+  get  'requests/:id_request' , to:'requests#show' , as:'requests_detail'
 
-  #patch 'request_applies/rechazo_apply/:id_request/:id_request_apply', to: 'request_applies#rechazo_apply', as: 'rechazo'
-  patch 'request_applies/rechazo_apply/:id_request_apply', to: 'request_applies#rechazo_apply', as: 'rechazo'
+  post 'requests/:id_request/comments' , to:'requests#create_comment' , as:'create_comment'
+
+  get  'request_applies/accepted_applies'
+  post 'request_applies/apply/:id_request', to:'request_applies#new',  as:'apply'
+
+  #patch 'request_applies/revoke_apply/:id_request/:id_request_apply', to: 'request_applies#revoke_apply', as: 'rechazo'
+  patch 'request_applies/rechazo_apply/:id_request_apply', to: 'request_applies#revoke_apply', as: 'rechazo'
   post 'request_applies/accept_apply/:id_request_apply', to: 'request_applies#accept_apply', as: 'accept_apply'
 
-  root 'landings#welcome'
 
+
+
+  root 'landings#welcome'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

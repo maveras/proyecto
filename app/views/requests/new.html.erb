@@ -1,0 +1,13 @@
+<h1>Crea una nueva actividad</h1>
+
+<%= form_for @request, url: {action: "create"} do |f| %>
+  <%= f.select :interest_id, options_from_collection_for_select(@interest_by_importance, "id", "name") %>
+  <%= f.text_field :title %>
+  <%= f.text_area :description, size: "60x12" %>
+  <%= f.date_field(:date_activity) %>
+  <%= f.time_select(:date_activity) %>
+  <%= f.date_field(:date_activity_end) %>
+  <%= f.time_select(:date_activity_end) %>
+  
+  <%= f.submit "Crear actividad" %>
+<% end %>

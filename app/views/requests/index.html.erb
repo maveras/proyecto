@@ -1,49 +1,54 @@
 <table>
   <thead>
-  <tr colspan="3"> Interesting things to <strong>Do it!</strong></tr>
+  <tr colspan="3"> Actividades Interesantes para ti</tr>
   <tbody>
     <% @interesting_user_requests.each do |request| %>
       <tr>
-        <td><strong><%= request.user.name %></strong> want to do it something interesting 4 you</td>               
+        <td><strong><%= request.user.name %></strong> Quiere hacer algo interesante para ti</td>               
       </tr>
       <tr>
-        <td><strong>Description</strong></td>
+        <td><strong>Descripcion</strong></td>
         <td>"<%= request.description %>"</td> 
       </tr>
       <tr>        
-        <td><strong>When</strong></td>
-        <td><%= request.day_time %></td>        
+        <td><strong>Cuando</strong></td>
+        <td><%= request.date_activity %></td>        
       </tr> 
       <tr>        
-        <td><strong>Where</strong></td>   
+        <td><strong>Donde</strong></td>   
         <td><%= request.location %></td>                
       </tr>
       <tr>
-        <td><strong>State request</strong></td>
+        <td><strong>Estado</strong></td>
         <td><%= request.state_request %></td>          
       </tr>
+      
+      <tr><td><button class="btn btn-success"><%= link_to 'Detalles', requests_detail_path(request)%></button></td><td><button class="btn btn-success">Otra cosa</button></td></td></tr>
+      <tr></tr>
       </br>
+
     <% end %>
   </tbody>
 </table>
 
 </br>
+
 <table>
   <thead>
     <tr>
-      <td colspan="3">Other user want to do it!</td>
+      <td colspan="3">Otros usuarios quieres hacer...</td>
     </tr>
   </thead>
 
   <tbody>
     <% @other_requests.each do |other_request| %>
       <tr>
-        <td><strong><%= other_request.user.name %> </strong></td>
+        <td><strong><%= other_request.user.try(:name) %> </strong></td>
         <td>"<%= other_request.description %>"</td>        
       </tr>
       <tr>        
         <td><strong>When</strong></td>
-        <td><%= other_request.day_time %></td>        
+        <td><%= other_request.date_activity %></td>        
       </tr> 
       <tr>        
         <td><strong>Where</strong></td>   

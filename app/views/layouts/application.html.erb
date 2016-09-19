@@ -34,7 +34,11 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <%if signed_in? %>        
         <li><a href="#">Link</a></li>
+        <% else %>
+          <li><%= link_to 'Registrarse', new_user_registration_path %> </li>          
+        <% end %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -44,7 +48,7 @@
             <li role="separator" class="divider"></li>
             <li><%= link_to "Salir", destroy_user_session_path, method: :delete %></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
+            <li><%= link_to 'Ingresar', new_user_session_path %></li>
           </ul>
         </li>
       </ul>
@@ -55,7 +59,12 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
+        <%if signed_in? %>
+          <li><a href="#">Hola <%= current_user.name %> <%= current_user.id %> </a></li>
+        <% else %>  
+          <li></li>
+          <%end %>
+
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">

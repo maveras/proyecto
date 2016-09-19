@@ -1,0 +1,40 @@
+
+<div>
+  <h4><%= @request.user.name %></h2>
+  <h2><%= @request.title %></h3>
+  <h3><%= @request.description%></h3>
+  <h3><%= @request.interest.name %></h3>  
+  <h3>Lugar: <%= @request.location %></h3>
+  <h3><%= @request.date_activity %></h3>
+  <h3><%= @request.date_activity_end %></h3>
+</div>
+</br>
+<div>
+el estado!!!!<%=  @estado_boton_postulacion %>
+  <div class="postular">
+    <% unless @estado_boton_postulacion%>
+      <button class="btn btn-success"><%= link_to 'Postula a esta actividad!' , apply_path(@request),  method: :post %></button></div>
+    <% else %>
+      <button class="btn btn-alert" disabled="disabled"> Ya postulaste a esta actividad</button></div>
+    <% end %>
+    
+  <div> <%= pluralize(@total_postulaciones, 'usuario postulando a esta actividad', 'usuarios postulando a esta actividad')  %></div>
+  <div class="user_foto">
+    fotito
+  </div>
+  <div>dejar comentario 
+  <%= form_for @comment, url: create_comment_path, remote: true do |f| %>
+  <%= f.text_field :content%>      
+  <%= f.submit 'Dejar Comentario', class: 'btn btn-outline btn-success' %>
+  <% end %>
+  </div>  
+</div>
+<div>
+  9 Comentarios
+  <div class="comments">      
+    <% @comments.each do |comment| %>
+    <%= render 'requests/comment' %>
+    <% end %>      
+  </div>
+</div>
+

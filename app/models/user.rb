@@ -9,13 +9,7 @@ class User < ActiveRecord::Base
   has_many :requests
   has_many :request_applies
   has_many :request, through: :request_applies  
+  has_many :comments
 
-  def activities
-  	requests
-  	.active_requests
-	.joins(:request_applies)
-	.where("request_applies.state = ?",1)
-  end
-
-
+  
 end

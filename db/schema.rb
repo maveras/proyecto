@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830225121) do
+ActiveRecord::Schema.define(version: 20160919165215) do
 
   create_table "comentaries", force: :cascade do |t|
     t.integer  "user_id"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 20160830225121) do
 
   add_index "comentaries", ["request_apply_id"], name: "index_comentaries_on_request_apply_id"
   add_index "comentaries", ["user_id"], name: "index_comentaries_on_user_id"
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "request_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text     "content"
+  end
+
+  add_index "comments", ["request_id"], name: "index_comments_on_request_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "interests", force: :cascade do |t|
     t.string   "name"
@@ -45,13 +56,13 @@ ActiveRecord::Schema.define(version: 20160830225121) do
     t.integer  "user_id"
     t.integer  "interest_id"
     t.text     "description"
-    t.datetime "day_time"
     t.integer  "state_request"
     t.string   "location"
-    t.datetime "date_end"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.text     "title"
+    t.datetime "date_activity"
+    t.datetime "date_activity_end"
   end
 
   add_index "requests", ["interest_id"], name: "index_requests_on_interest_id"
