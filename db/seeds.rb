@@ -18,7 +18,7 @@ Request.reset_pk_sequence
 RequestApply.reset_pk_sequence
 
 
-user1 = User.create!(name: "Marcelo", password: "123456789" ,email: "marcelo.verasalvatierra@gmail.com")
+user1 = User.create!(name: "Chelo", password: "123456789" ,email: "marcelo@gmail.com")
 user2 = User.create!(name: "Juan", password: "123456789" ,email: "juan@gmail.com")
 user3 = User.create!(name: "Pepito", password: "123456789" ,email: "pepito@gmail.com")
 user4 = User.create!(name: "Pedrito", password: "123456789" ,email: "pedrito@gmail.com")

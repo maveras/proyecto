@@ -14,6 +14,9 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'devise'
 gem 'activerecord-reset-pk-sequence'
 
+gem "omniauth"
+gem "omniauth-facebook"
+
 gem 'railroady'
 gem 'puma'
     

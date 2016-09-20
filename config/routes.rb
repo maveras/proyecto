@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   get 'users/index'
 
   devise_for :users, controllers: {
-        registrations: 'registrations' 
-      }
+      sessions: "users/sessions",
+      registrations: 'registrations',
+      omniauth_callbacks: "users/omniauth_callbacks" 
+  }
   resources :users do  
     resources :user_interests
   end
