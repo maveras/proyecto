@@ -14,6 +14,18 @@ class Request < ActiveRecord::Base
 
   before_create :agrega_estado_activo
 
+  def self.all_interesting_request(current_user)
+    Request.all.includes(:user)
+          .where.not(user_id: current_user.id)
+          .joins(:interest)
+          .where(interest_id:   
+            current_user.interests.pluck("interests.id")
+          )
+  end
+
+  def self.all_includes_user
+    Request.all.includes(:user)
+  end
 
 
   def self.get_active_request_number

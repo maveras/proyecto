@@ -1,63 +1,65 @@
-<table>
-  <thead>
-  <tr colspan="3"> Actividades Interesantes para ti</tr>
-  <tbody>
-    <% @interesting_user_requests.each do |request| %>
-      <tr>
-        <td><strong><%= request.user.name %></strong> Quiere hacer algo interesante para ti</td>               
-      </tr>
-      <tr>
-        <td><strong>Descripcion</strong></td>
-        <td>"<%= request.description %>"</td> 
-      </tr>
-      <tr>        
-        <td><strong>Cuando</strong></td>
-        <td><%= request.date_activity %></td>        
-      </tr> 
-      <tr>        
-        <td><strong>Donde</strong></td>   
-        <td><%= request.location %></td>                
-      </tr>
-      <tr>
-        <td><strong>Estado</strong></td>
-        <td><%= request.state_request %></td>          
-      </tr>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Actividades Interesantes</h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+    <% unless @interesting_user_requests.blank? or @interesting_user_requests.nil?%>
+       <% @interesting_user_requests.each do |request| %>
+         
+           <div class="col-sm-6 col-md-4">
+             <div class="thumbnail">
+               <img src="..." alt="...">
+               <div class="caption">
+                 <h3><%= request.title %></h3>
+                 <h4><%= request.description %></h4>
+                 <h5><strong>Creada por:</strong> <%= image_tag(request.user.image) %><%= request.user.name %></h4>
+                 <p><strong>Lugar:</strong><%= request.location %></p>
+                 <p><strong>Dia y Hora:</strong><%= request.date_activity %></p>        
+                 <p><%= link_to 'Detalles', requests_detail_path(request), :class=>"btn btn-primary"%>
+                 </p>
+               </div>
+             </div>
+           </div>
+         
+       <% end %>
+    <% else %>
+    <strong>
+      <div class="alert alert-warning" role="alert">        
+        <%= link_to 'No tienes intereses asociados, selecciona algun interes', user_user_interests_path(current_user.id) ,:class=>"alert-link"%>
+      </div>
+      </strong>
+    <% end %>
+    </div>
+  </div>
+  <div class="panel-footer"></div>
+</div>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Otras actividades</h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+       <% @other_requests.each do |other_request| %>
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img src="..." alt="...">
+            <div class="caption">
+              <h3><%= other_request.title %></h3>
+              <h4><%= other_request.description %></h4>
+              <h5><strong>Creada por:</strong> <%= image_tag(other_request.user.image) %><%= other_request.user.try(:name) %></h4>
+              <p><strong>Lugar:</strong><%= other_request.location %></p>
+              <p><strong>Dia y Hora:</strong><%= other_request.date_activity %></p>        
+              <p><%= link_to 'Detalles', requests_detail_path(other_request), :class=>"btn btn-primary"%></button>
+              </p>
+            </div>
+          </div>
+        </div>
+       <% end %>
+     </div>
+  </div>
+  <div class="panel-footer"></div>
+
       
-      <tr><td><button class="btn btn-success"><%= link_to 'Detalles', requests_detail_path(request)%></button></td><td><button class="btn btn-success">Otra cosa</button></td></td></tr>
-      <tr></tr>
-      </br>
-
-    <% end %>
-  </tbody>
-</table>
-
-</br>
-
-<table>
-  <thead>
-    <tr>
-      <td colspan="3">Otros usuarios quieres hacer...</td>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @other_requests.each do |other_request| %>
-      <tr>
-        <td><strong><%= other_request.user.try(:name) %> </strong></td>
-        <td>"<%= other_request.description %>"</td>        
-      </tr>
-      <tr>        
-        <td><strong>When</strong></td>
-        <td><%= other_request.date_activity %></td>        
-      </tr> 
-      <tr>        
-        <td><strong>Where</strong></td>   
-        <td><%= other_request.location %></td>                
-      </tr>
-      <tr>
-        <td><strong>State Request</strong></td>
-        <td><%= other_request.state_request %></td>          
-      </tr>
-    <% end %>
-  </tbody>
-</table>

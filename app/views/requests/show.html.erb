@@ -23,17 +23,19 @@ el estado!!!!<%=  @estado_boton_postulacion %>
     fotito
   </div>
   <div>dejar comentario 
-  <%= form_for @comment, url: create_comment_path, remote: true do |f| %>
+  <%= form_for @comment, url: create_comment_path do |f| %>
   <%= f.text_field :content%>      
   <%= f.submit 'Dejar Comentario', class: 'btn btn-outline btn-success' %>
   <% end %>
   </div>  
 </div>
 <div>
-  9 Comentarios
+  <%= pluralize(@comments.count, 'Comentario', 'Comentarios')  %>  
   <div class="comments">      
     <% @comments.each do |comment| %>
-    <%= render 'requests/comment' %>
+    <%= image_tag(comment.user.image) %>
+      <%= comment.user.name %> hace   <%= comment.created_at%>    
+      <%= comment.content %>    
     <% end %>      
   </div>
 </div>

@@ -4,18 +4,20 @@ class RequestsController < ApplicationController
 	def index
 		# Todos los requests exxcepto los del usuario
 		#asociados a sus intereses
-		@requests = Request.all
-		@interesting_user_requests = Request.all
-			.where.not(user_id: current_user.id)
-			.joins(:interest)
-			.where(interest_id: 	
-				current_user.interests.pluck("interests.id")
-			)
+		@requests = Request.all_includes_user
+		
+		#@interesting_user_requests = Request.all
+		#	.where.not(user_id: current_user.id)
+		#	.joins(:interest)
+		#	.where(interest_id: 	
+		#		current_user.interests.pluck("interests.id")
+		#	)
+		@interesting_user_requests = Request.all_interesting_request(current_user)	
 		#render json:@requests.to_json
 
 		#current_user_interest_ids = current_user.interests.pluck(:id)
 		#@user_to_do_requests = Request.where(id: current_user_interest_ids)
-
+		#@interesting_request_count = @interesting_user_requests.count
 		@other_requests = @requests - @interesting_user_requests
 		#render json:@other_requests.to_json
 		#byebug
@@ -55,20 +57,20 @@ class RequestsController < ApplicationController
 		comment.user = current_user		
 		respond_to do |format|
 		  if comment.save
-		    format.html { redirect_to requests_detail_path(comment), notice: 'Se creo el comentario.' }
-		    format.json { render :show, status: :created, location: requests_detail_path(comment) }
-		    format.js
+		    format.html { redirect_to requests_detail_path(comment.request_id), notice: 'Se creo el comentario.' }
+		    format.json { render :show, status: :created, location: requests_detail_path(comment.request_id) }
+		    
 		  else
 		    format.html { render :new }
 		    format.json { render json: comment.errors, status: :unprocessable_entity }
-		    format.js
+		    
 		  end
 		end		
 	end
 
 
 	
-
+	@title = "Actividades"
 
 	private 
 		def request_params

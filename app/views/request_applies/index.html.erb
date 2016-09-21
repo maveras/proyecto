@@ -1,11 +1,19 @@
-<h1>Hola <%= current_user.name %> <%= current_user.id%></h1>
-
-<% if @my_activities.count > 0  %>
-	<h3>Tus actividades con solicitudes de participación</h3>
-	<%= render @my_activities %>
-
-<% else %>
-	<h3>No has creado actividades que hacer :'( </h3>
-<% end %>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Hola <%= current_user.name %>, estas son tus actividades creadas</h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+    	<% if @my_activities.count > 0  %>
+    		<h3></h3>
+    		<%= render @my_activities %>
+    	<% else %>
+    		<%= link_to 'No has creado actividades  :\'(, crea alguna actividad!', requests_new ,:class=>"alert-link"%>
+    		<h3> </h3>
+    	<% end %>	
+    </div>
+  </div>
+  <div class="panel-footer"></div>
+</div>
 
 
