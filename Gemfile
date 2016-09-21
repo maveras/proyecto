@@ -19,6 +19,11 @@ gem "omniauth-facebook"
 
 gem 'railroady'
 gem 'puma'
+
+gem 'chartkick'
+gem 'groupdate'
+
+gem "bullet", :group => "development"
     
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
