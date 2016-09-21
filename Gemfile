@@ -25,7 +25,7 @@ gem 'groupdate'
 
 gem "bullet", :group => "development"
     
-
+gem 'pg'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160920003628) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "comentaries", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "request_apply_id"
@@ -21,8 +24,8 @@ ActiveRecord::Schema.define(version: 20160920003628) do
     t.datetime "updated_at",       null: false
   end
 
-  add_index "comentaries", ["request_apply_id"], name: "index_comentaries_on_request_apply_id"
-  add_index "comentaries", ["user_id"], name: "index_comentaries_on_user_id"
+  add_index "comentaries", ["request_apply_id"], name: "index_comentaries_on_request_apply_id", using: :btree
+  add_index "comentaries", ["user_id"], name: "index_comentaries_on_user_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.integer  "request_id"
@@ -32,8 +35,8 @@ ActiveRecord::Schema.define(version: 20160920003628) do
     t.text     "content"
   end
 
-  add_index "comments", ["request_id"], name: "index_comments_on_request_id"
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+  add_index "comments", ["request_id"], name: "index_comments_on_request_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "interests", force: :cascade do |t|
     t.string   "name"
@@ -49,8 +52,8 @@ ActiveRecord::Schema.define(version: 20160920003628) do
     t.integer  "request_id"
   end
 
-  add_index "request_applies", ["request_id"], name: "index_request_applies_on_request_id"
-  add_index "request_applies", ["user_id"], name: "index_request_applies_on_user_id"
+  add_index "request_applies", ["request_id"], name: "index_request_applies_on_request_id", using: :btree
+  add_index "request_applies", ["user_id"], name: "index_request_applies_on_user_id", using: :btree
 
   create_table "requests", force: :cascade do |t|
     t.integer  "user_id"
@@ -65,8 +68,8 @@ ActiveRecord::Schema.define(version: 20160920003628) do
     t.datetime "date_activity_end"
   end
 
-  add_index "requests", ["interest_id"], name: "index_requests_on_interest_id"
-  add_index "requests", ["user_id"], name: "index_requests_on_user_id"
+  add_index "requests", ["interest_id"], name: "index_requests_on_interest_id", using: :btree
+  add_index "requests", ["user_id"], name: "index_requests_on_user_id", using: :btree
 
   create_table "user_interests", force: :cascade do |t|
     t.integer  "user_id"
@@ -75,8 +78,8 @@ ActiveRecord::Schema.define(version: 20160920003628) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "user_interests", ["interest_id"], name: "index_user_interests_on_interest_id"
-  add_index "user_interests", ["user_id"], name: "index_user_interests_on_user_id"
+  add_index "user_interests", ["interest_id"], name: "index_user_interests_on_interest_id", using: :btree
+  add_index "user_interests", ["user_id"], name: "index_user_interests_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -97,7 +100,17 @@ ActiveRecord::Schema.define(version: 20160920003628) do
     t.string   "image"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "comentaries", "request_applies"
+  add_foreign_key "comentaries", "users"
+  add_foreign_key "comments", "requests"
+  add_foreign_key "comments", "users"
+  add_foreign_key "request_applies", "requests"
+  add_foreign_key "request_applies", "users"
+  add_foreign_key "requests", "interests"
+  add_foreign_key "requests", "users"
+  add_foreign_key "user_interests", "interests"
+  add_foreign_key "user_interests", "users"
 end
