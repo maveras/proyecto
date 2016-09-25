@@ -19,9 +19,9 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
-  username: marceloverasalvatierra
-  password: 1234
-  pool: 5
+  #username: marceloverasalvatierra
+  #password: 1234
+  #pool: 5
   #port: 5433
 
 development:
