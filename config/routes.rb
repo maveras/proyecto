@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments
   get 'dashboard/index'
 
   get 'users/index'
@@ -21,7 +22,6 @@ Rails.application.routes.draw do
   post 'requests/create'
   get  'requests/:id_request' , to:'requests#show' , as:'requests_detail'
 
-  post 'requests/:id_request/comments' , to:'requests#create_comment' , as:'create_comment'
 
   get  'request_applies/accepted_applies'
   post 'request_applies/apply/:id_request', to:'request_applies#new',  as:'apply'
@@ -29,8 +29,6 @@ Rails.application.routes.draw do
   #patch 'request_applies/revoke_apply/:id_request/:id_request_apply', to: 'request_applies#revoke_apply', as: 'rechazo'
   patch 'request_applies/rechazo_apply/:id_request_apply', to: 'request_applies#revoke_apply', as: 'rechazo'
   post 'request_applies/accept_apply/:id_request_apply', to: 'request_applies#accept_apply', as: 'accept_apply'
-
-
 
 
   root 'landings#welcome'
@@ -70,8 +68,7 @@ Rails.application.routes.draw do
 
   # Example resource route with more complex sub-resources:
   #   resources :products do
-  #     resources :comments
-  #     resources :sales do
+  #     #     resources :sales do
   #       get 'recent', on: :collection
   #     end
   #   end

@@ -21,22 +21,11 @@ el estado!!!!<%=  @estado_boton_postulacion %>
   <div> <%= pluralize(@total_postulaciones, 'usuario postulando a esta actividad', 'usuarios postulando a esta actividad')  %></div>
   <div class="user_foto">
     fotito
-  </div>
-  <div>dejar comentario 
-  <%= form_for @comment, url: create_comment_path do |f| %>
-  <%= f.text_field :content%>      
-  <%= f.submit 'Dejar Comentario', class: 'btn btn-outline btn-success' %>
-  <% end %>
-  </div>  
+  </div> 
 </div>
-<div>
-  <%= pluralize(@comments.count, 'Comentario', 'Comentarios')  %>  
-  <div class="comments">      
-    <% @comments.each do |comment| %>
-    <%= image_tag(comment.user.image) %>
-      <%= comment.user.name %> hace   <%= comment.created_at%>    
-      <%= comment.content %>    
-    <% end %>      
-  </div>
-</div>
+<%= render 'comments/form' %>
+
+ <%= render 'comments/index'%>  
+
+
 

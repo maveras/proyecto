@@ -1,30 +1,89 @@
-def create_comment			
-	comment = Comment.new(comment_params)
-	comment.request_id = @request.id
-	comment.user = current_user		
-	respond_to do |format|
-	  if comment.save
-	    format.html { redirect_to requests_detail_path(comment), notice: 'Se creo el comentario.' }
-	    format.json { render :show, status: :created, location: requests_detail_path(comment) }
-	    format.js
-	  else
-	    format.html { render :new }
-	    format.json { render json: comment.errors, status: :unprocessable_entity }
-	    format.js
-	  end
-	end		
-end
+class CommentsController < ApplicationController
+  before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :set_user  
+  before_action :set_request
 
-def request_params
-	params.require(:request).permit(:title, :description, :date_activity, :date_activity_end,:interest_id)
-end
-def set_request
-   @request = Request.find(params[:id_request])
-end
-def set_comment
-	@comment = Comment.find(params[:comment])
-end
+  # GET /comments
+  # GET /comments.json
 
-def comment_params
-	params.require(:comment).permit(:content)
+  def index
+    @comments = Comment.all
+  end
+
+  # GET /comments/1
+  # GET /comments/1.json
+  def show
+  end
+
+  # GET /comments/new
+  def new
+    @comment = Comment.new
+  end
+
+  # GET /comments/1/edit
+  def edit
+  end
+
+  # POST /comments
+  # POST /comments.json
+  def create
+
+    @comment = Comment.new(comment_params)    
+
+    @comment.user_id = @user.id
+    @comment.request_id = @request.id
+
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.json { render :show, status: :created, location: @comment }
+        format.js
+      else
+        format.html { render :new }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+        format.js
+      end
+    end
+  end
+
+  # PATCH/PUT /comments/1
+  # PATCH/PUT /comments/1.json
+  def update
+    respond_to do |format|
+      if @comment.update(comment_params)
+        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+        format.json { render :show, status: :ok, location: @comment }
+      else
+        format.html { render :edit }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /comments/1
+  # DELETE /comments/1.json
+  def destroy
+    @comment.destroy
+    respond_to do |format|
+      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_comment
+      @comment = Comment.find(params[:id])
+    end
+    def set_user
+      @user = current_user
+    end
+    def set_request
+      @request = Request.find(params[:request_id_f])      
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def comment_params
+      params.require(:comment).permit(:contenido, :user_id, :request_id)
+    end
 end
