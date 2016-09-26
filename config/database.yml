@@ -35,6 +35,6 @@ test:
 production:
   <<: *default
   database: do_it_production
-  username: do_it
+  username: ubuntu
   password: <%= ENV['NOMBRE_APP_DATABASE_PASSWORD'] %>
   port: 5432
