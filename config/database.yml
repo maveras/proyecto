@@ -22,7 +22,7 @@ default: &default
   username: marceloverasalvatierra
   password: 1234
   pool: 5
-  port: 5432
+  port: 5433
 
 development:
   <<: *default
@@ -37,3 +37,4 @@ production:
   database: do_it_production
   username: do_it
   password: <%= ENV['NOMBRE_APP_DATABASE_PASSWORD'] %>
+  port: 5432
