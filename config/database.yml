@@ -22,7 +22,7 @@ default: &default
   username: marceloverasalvatierra
   password: 1234
   pool: 5
-  port: 5433
+  port: 5432
 
 development:
   <<: *default
