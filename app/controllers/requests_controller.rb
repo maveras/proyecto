@@ -37,6 +37,7 @@ class RequestsController < ApplicationController
 		#byebug
 		#date_activity_date = request.date_activity.to_date
 		#date_activity_hour = request.date_activity
+		byebug
 		if request.save
 			redirect_to request_applies_index_path
 		else
