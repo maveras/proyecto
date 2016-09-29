@@ -3,7 +3,9 @@ class RequestAppliesController < ApplicationController
 	before_action :set_request, only: [:new]
 
 	def index
-		@my_activities = current_user.requests.active_requests
+		@my_activities = current_user.requests.active_requests.reverse
+				@accepted_requests = current_user.requests.where(state_request:2)
+
 	end
 
 	def new 
@@ -19,6 +21,7 @@ class RequestAppliesController < ApplicationController
 	
 	
 	def accepted_applies
+		
 		#@accepted_applies = Request
 		#						.active_requests
 		#						.joins(:request_applies)

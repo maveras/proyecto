@@ -28,6 +28,7 @@ class Request < ActiveRecord::Base
   end
 
 
+
   def self.get_active_request_number
   	return 1
   end

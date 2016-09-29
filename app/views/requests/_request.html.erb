@@ -1,9 +1,12 @@
+
 	<div id="actividad-<%= request.id%>" class="jumbotron">
 	<%= request.id %>
 		<h2><strong>Titulo:</strong><%= request.title %></h2>
 		<h3><strong>Descripcion:</strong><%= request.description %></h2>
-		<p><strong>Dia y hora de inicio:</strong><%= request.date_activity %></p>
-		<p><strong>Dia y hora fin:</strong><%= request.date_activity_end %></p>
+		<p><strong>Dia Inicio:</strong><%= request.date_activity.strftime("%d/%m/%y") %></p>
+		<p><strong>Dia fin:</strong><%= request.date_activity_end.strftime("%d/%m/%y") %></p>
+		
+		
 		<p><strong>Lugar:</strong><%= request.location %></p>
 		
 		<% if request.request_applies.count > 0 %>

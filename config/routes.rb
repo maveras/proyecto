@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get  'requests/new'
   post 'requests/create'
   get  'requests/:id_request' , to:'requests#show' , as:'requests_detail'
+  get  'requests/accepted_request', to:'requests#accepted_request' , as:'accepted_request'
 
 
   get  'request_applies/accepted_applies'

@@ -34,6 +34,8 @@ class RequestsController < ApplicationController
 
 		request = Request.new(request_params)
 		request.user = current_user
+		#request.date_activity.strftime("%d/%m/%y")
+
 		#byebug
 		#date_activity_date = request.date_activity.to_date
 		#date_activity_hour = request.date_activity
@@ -50,11 +52,15 @@ class RequestsController < ApplicationController
 		@comments = Comment.joins(:request).where("requests.id = ?", @request.id)
 		@comment = Comment.new		
 	end
+
+	#def accepted_request
+	#	@accepted_requests = current_user.request.where(state_request:2)
+	#end
 	
 
 	private 
 		def request_params
-      		params.require(:request).permit(:title, :description, :date_activity, :date_activity_end,:interest_id)
+      		params.require(:request).permit(:title, :description, :date_activity, :date_activity_end,:interest_id,:time_begin,:time_end)
     	end
     	def set_request
 	      @request = Request.find(params[:id_request])

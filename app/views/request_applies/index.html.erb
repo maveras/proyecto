@@ -1,19 +1,61 @@
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h3 class="panel-title">Hola <%= current_user.name %>, estas son tus actividades creadas</h3>
-  </div>
-  <div class="panel-body">
-    <div class="row">
-    	<% if @my_activities.count > 0  %>
-    		<h3></h3>
-    		<%= render @my_activities %>
-    	<% else %>
-    		<%= link_to 'No has creado actividades  :\'(, crea alguna actividad!', requests_new ,:class=>"alert-link"%>
-    		<h3> </h3>
-    	<% end %>	
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Hola <%= current_user.name %>, estas son tus actividades creadas</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <% if @my_activities.count > 0  %>
+              <h3></h3>
+              <%= render @my_activities %>
+            <% else %>
+              <%= link_to 'No has creado actividades  :\'(, crea alguna actividad!', requests_new ,:class=>"alert-link"%>
+              <h3> </h3>
+            <% end %> 
+          </div>
+        </div>
+        <div class="panel-footer"></div>
+      </div>      
+    </div>
+    <div role="tabpanel" class="tab-pane" id="profile">
+      <div role="tabpanel" class="tab-pane active" id="home">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Hola <%= current_user.name %>, estas son tus actividades comprometidas </h3>
+            </div>
+            <%= @accepted_requests.count %>  
+            <div class="panel-body">
+              <% @accepted_requests.each do |accepted_request|%>               
+              <div class="row">                
+                  <h3></h3>
+                  <div id="" class="jumbotron">                
+                    <h2><strong>Titulo:</strong><%= accepted_request.title %></h2>
+                    <h3><strong>Descripcion:</strong><%= accepted_request.description %></h2>
+                    <p><strong>Dia Inicio:</strong><%= accepted_request.date_activity.strftime("%d/%m/%y") %></p>
+                    <p><strong>Dia fin:</strong><%= accepted_request.date_activity_end.strftime("%d/%m/%y") %></p>                  
+                    <p><strong>Lugar:</strong><%= accepted_request.location %></p>
+                  </div>
+                
+              <% end %> 
+              </div>
+          </div>
+          <div class="panel-footer"></div>
+        </div>      
+      </div>
+      
     </div>
   </div>
-  <div class="panel-footer"></div>
+
 </div>
-
-
