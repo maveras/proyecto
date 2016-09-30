@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   get  'requests/index'  
   get  'requests/new'
+  get  'requests/disabled'
   post 'requests/create'
   get  'requests/:id_request' , to:'requests#show' , as:'requests_detail'
   get  'requests/accepted_request', to:'requests#accepted_request' , as:'accepted_request'

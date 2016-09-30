@@ -4,9 +4,10 @@ class RequestAppliesController < ApplicationController
 
 	def index
 		@my_activities = current_user.requests.active_requests.reverse
-				@accepted_requests = current_user.requests.where(state_request:2)
-
+		
 	end
+
+	
 
 	def new 
 		@apply = RequestApply.new(user:current_user,request:@request)

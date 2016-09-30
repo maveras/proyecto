@@ -22,6 +22,9 @@ class RequestsController < ApplicationController
 		#render json:@other_requests.to_json
 		#byebug
 	end
+	def disabled
+		@accepted_requests = current_user.requests.where(state_request:2)
+	end
 
 	def new
 		user_interest = current_user.interests
